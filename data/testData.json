@@ -1,0 +1,17 @@
+{
+    "registrationData": {
+      "firstName": "testFirstName",
+      "lastName": "testLastName",
+      "email": "someEmail3@example.com",
+      "password": "test123",
+      "confirmPassword": "test123"
+    },
+
+    "loginData": {
+      "email": "someEmail@example.com",
+      "password": "test123"
+    },
+
+    "successfullRegistrationMessage": "Your registration completed"
+  }
+  

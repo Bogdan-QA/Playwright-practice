@@ -1,7 +1,8 @@
 // tests/demowebshop.spec.js
-import { test } from '@playwright/test';
+import { test , expect} from '@playwright/test';
 import { DemoWebShopHomePage } from '../pages/DemoWebShopObjects/DemoWebShopHomePage';
-import { RegistraionPage } from '../pages/DemoWebShopObjects/RegistrationPage';
+import { RegistrationPage } from '../pages/DemoWebShopObjects/RegistrationPage';
+import testData from '../data/testData.json';
 
 test.describe('Demo Web Shop UI Tests', () => {
   let demoWebShopHomePage;
@@ -9,25 +10,22 @@ test.describe('Demo Web Shop UI Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     demoWebShopHomePage = new DemoWebShopHomePage(page);
-    registrationPage = new RegistraionPage(page);
+    registrationPage = new RegistrationPage(page);
     await demoWebShopHomePage.open();
   });
 
-  test.only('Verify that allows register a User', async () => {
+  test('Verify that allows register a User', async () => {
     await demoWebShopHomePage.registerUser.click();
-    await registrationPage.registerUser({
-      firstName: 'testFirstName',
-      lastName: 'testLastName',
-      email: 'someEmail@example.com',
-      password: 'test123',
-      confirmPassword: 'test123'
-    });
-    await demoWebShopHomePage.page.waitForTimeout(3000);
-    
+    await registrationPage.registerUser(testData.registrationData);
+    await expect(registrationPage.registrationMessage).toBeVisible();
+    const message = await registrationPage.getRegistrationMessage();
+    expect(message).toContain(testData.successfullRegistrationMessage);
   });
 
-  test('Verify adding an item to the Wishlist', async () => {
-    await demoWebShopHomePage.addItemToWishlist();
-    // Further verification can be added
+  test('Verify that allows a user to login', async () => {
+    await demoWebShopHomePage.loginUser.click();
+    await registrationPage.loginUser(testData.loginData);
+    const message = await demoWebShopHomePage.getAccountEmail();
+    expect(message).toContain(testData.loginData.email);
   });
 });

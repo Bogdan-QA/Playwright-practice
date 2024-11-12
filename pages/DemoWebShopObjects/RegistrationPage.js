@@ -1,6 +1,4 @@
-import { expect } from '@playwright/test';
-
-export class RegistraionPage {
+export class RegistrationPage {
   constructor(page) {
     this.page = page;
 
@@ -12,6 +10,8 @@ export class RegistraionPage {
     this.passwordField = page.locator('#Password');
     this.confirmPasswordField = page.locator('#ConfirmPassword');
     this.registerButton = page.locator('#register-button')
+    this.registrationMessage = page.locator('.result');
+    this.loginButton = page.locator('.login-button');
   }
 
   async registerUser({ firstName, lastName, email, password, confirmPassword }) {
@@ -25,6 +25,19 @@ export class RegistraionPage {
 
     // Submit the form
     await this.registerButton.click();
+  }
+
+  async loginUser({email, password }) {
     
+    // Fill in the required fields
+    await this.emailField.fill(email);
+    await this.passwordField.fill(password);
+
+    // Submit the form
+    await this.loginButton.click();
+  }
+
+  async getRegistrationMessage() {
+    return await this.registrationMessage.textContent();
   }
 }

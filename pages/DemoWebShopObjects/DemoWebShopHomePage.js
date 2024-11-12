@@ -4,12 +4,16 @@ export class DemoWebShopHomePage {
   constructor(page) {
     this.page = page;
     this.registerUser = page.locator('.ico-register');
-    this.firstName = page.locator('#FirstName');
-    
+    this.loginUser = page.locator('.ico-login');
+    this.loggedInAccount = page.locator('.account').first();
   }
 
   async open() {
     await this.page.goto('https://demowebshop.tricentis.com/');
+  }
+
+  async getAccountEmail() {
+    return await this.loggedInAccount.textContent();
   }
 
   async verifyComputersSubcategories(expectedSubcategories) {
