@@ -142,6 +142,36 @@ test.describe.serial('Pet Store API Tests for pets', () => {
     expect(responseBody.status).toBe(updateData.status);
   });
 
+  test('Verify that allows updating Pet’s image', async ({ request }) => {
+  // Fetch the existing pet data
+  const petId = testData.petData.id;
+  const getResponse = await request.get(`${BASE_URL}/pet/${petId}`);
+  expect(getResponse.ok()).toBeTruthy();
+
+  const existingPetData = await getResponse.json();
+
+  // Update only the photoUrls while preserving other fields
+  const updatedData = {
+    ...existingPetData, // Preserve existing fields
+    photoUrls: ['https://example.com/updated-pet-image.jpg'], // Update image URL
+  };
+
+  // Send PUT request to update the pet
+  const putResponse = await request.put(`${BASE_URL}/pet`, {
+    data: updatedData,
+  });
+
+  expect(putResponse.ok()).toBeTruthy();
+
+  const responseBody = await putResponse.json();
+
+  // Verify the pet data is updated correctly
+  expect(responseBody.id).toBe(petId);
+  expect(responseBody.photoUrls).toContain('https://example.com/updated-pet-image.jpg');
+  expect(responseBody.name).toBe(existingPetData.name); // Verify name is preserved
+  expect(responseBody.status).toBe(existingPetData.status); // Verify status is
+  });
+
   test('Verify that allows deleting Pet', async ({ request }) => {
     const petId = testData.petData.id;
 

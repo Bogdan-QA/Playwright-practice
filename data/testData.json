@@ -6,6 +6,7 @@
     "password": "test123",
     "confirmPassword": "test123"
   },
+  "successfulRegistrationMessage": "Your registration completed",
   "loginData": {
     "email": "someEmail@example.com",
     "password": "test123"
@@ -15,7 +16,6 @@
     "Notebooks",
     "Accessories"
   ],
-  "successfulRegistrationMessage": "Your registration completed",
   "userCreationData": {
     "id": "1",
     "username": "testuser",
