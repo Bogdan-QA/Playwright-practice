@@ -6,6 +6,13 @@ export class DemoWebShopHomePage {
     this.registerUser = page.locator('.ico-register');
     this.loginUser = page.locator('.ico-login');
     this.loggedInAccount = page.locator('.account').first();
+    this.topNavigation = page.locator('.top-menu');
+    this.computersGroup = this.topNavigation.locator('a[href="/computers"]');
+    this.booksGroup = this.topNavigation.locator('a[href="/books"]');
+    this.cartButton = page.locator('.ico-cart').first();
+    this.cartQuantity = this.cartButton.locator('.cart-qty');
+    this.wishlistButton = page.locator('.ico-wishlist').first();
+    this.wishlistQuantity = this.wishlistButton.locator('.wishlist-qty');
   }
 
   async open() {

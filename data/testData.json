@@ -12,6 +12,8 @@
       "password": "test123"
     },
 
-    "successfullRegistrationMessage": "Your registration completed"
+    "subCategoryTitles": ["Desktops", "Notebooks", "Accessories"],
+
+    "successfulRegistrationMessage": "Your registration completed"
   }
   
