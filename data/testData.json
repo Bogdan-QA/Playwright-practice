@@ -1,19 +1,76 @@
 {
-    "registrationData": {
-      "firstName": "testFirstName",
-      "lastName": "testLastName",
-      "email": "someEmail3@example.com",
-      "password": "test123",
-      "confirmPassword": "test123"
+  "registrationData": {
+    "firstName": "testFirstName",
+    "lastName": "testLastName",
+    "email": "someEmail3@example.com",
+    "password": "test123",
+    "confirmPassword": "test123"
+  },
+  "loginData": {
+    "email": "someEmail@example.com",
+    "password": "test123"
+  },
+  "subCategoryTitles": [
+    "Desktops",
+    "Notebooks",
+    "Accessories"
+  ],
+  "successfulRegistrationMessage": "Your registration completed",
+  "userCreationData": {
+    "id": "1",
+    "username": "testuser",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "testuser@example.com",
+    "password": "test123",
+    "phone": "1234567890",
+    "userStatus": 1
+  },
+  "userList": [
+    {
+      "id": "2",
+      "username": "user1",
+      "firstName": "First1",
+      "lastName": "Last1",
+      "email": "user1@example.com",
+      "password": "password1",
+      "phone": "1234567890",
+      "userStatus": 1
     },
-
-    "loginData": {
-      "email": "someEmail@example.com",
-      "password": "test123"
+    {
+      "id": "3",
+      "username": "user2",
+      "firstName": "First2",
+      "lastName": "Last2",
+      "email": "user2@example.com",
+      "password": "password2",
+      "phone": "0987654321",
+      "userStatus": 1
     },
-
-    "subCategoryTitles": ["Desktops", "Notebooks", "Accessories"],
-
-    "successfulRegistrationMessage": "Your registration completed"
+    {
+      "id": "4",
+      "username": "user3",
+      "firstName": "First3",
+      "lastName": "Last3",
+      "email": "user3@example.com",
+      "password": "password3",
+      "phone": "1122334455",
+      "userStatus": 1
+    }
+  ],
+  "petData": {
+    "id": 123666,
+    "category": {
+      "id": 1234,
+      "name": "cat"
+    },
+    "name": "Nala Del Ray",
+    "photoUrls": [],
+    "tags": [],
+    "status": "available"
+  },
+  "updatePetData": {
+    "name": "Ramzes",
+    "status": "sold"
   }
-  
+}
