@@ -70,9 +70,25 @@ test.describe('EPAM.com About section UI Tests', () => {
     await epamHomePage.acceptCookies.click();
   });
 
-  test.skip('Check contact form fields validation', async () => {
+  test('Check contact form fields validation', async () => {
     await epamContactPage.contactUsButton.nth(1).click();
+    await epamContactPage.formSubmitButton.click();
 
+    const fieldLocators = epamContactPage.getAllFieldLocators();
+
+    // Loop through each locator and perform validations
+    for (const field of fieldLocators) {
+      // Check that data-required attribute equals "true"
+      await expect(field).toHaveAttribute('data-required', 'true');
+      // Check that data-required-msg attribute equals "This is a required field"
+      await expect(field).toHaveAttribute('data-required-msg', 'This is a required field');
+      // Check that the div has the class "validation-field"
+      await expect(field).toHaveClass(/validation-field/);
+    }
+    await expect(epamContactPage.consentCheckbox).toHaveAttribute('data-required', 'true');
+
+    // Assert that the "data-required-msg" attribute contains the specific message
+    await expect(epamContactPage.consentCheckbox).toHaveAttribute('data-required-msg', 'Please check this box if you want to proceed');
   });
 
   test('Check that the company logo leads to homepage', async () => {

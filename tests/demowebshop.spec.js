@@ -21,22 +21,22 @@ test.describe('Demo Web Shop UI Tests', () => {
 
   test('Verify that allows register a User', async () => {
     await demoWebShopHomePage.registerUser.click();
-    await registrationPage.registerUser(testData.registrationData);
+    await registrationPage.registerUser(testData.demoWebShopData.registrationData);
     await expect(registrationPage.registrationMessage).toBeVisible();
     const message = await registrationPage.getRegistrationMessage();
-    expect(message).toContain(testData.successfulRegistrationMessage);
+    expect(message).toContain(testData.demoWebShopData.successfulRegistrationMessage);
   });
 
   test('Verify that allows a user to login', async () => {
     await demoWebShopHomePage.loginUser.click();
-    await registrationPage.loginUser(testData.loginData);
+    await registrationPage.loginUser(testData.demoWebShopData.loginData);
     const message = await demoWebShopHomePage.getAccountEmail();
-    expect(message).toContain(testData.loginData.email);
+    expect(message).toContain(testData.demoWebShopData.loginData.email);
   });
 
   test('Verify that the Computer groups has 3 sub groups with correct names', async () => {
     await demoWebShopHomePage.computersGroup.click();
-    await productListPage.verifySubCategoryTitles(testData.subCategoryTitles);
+    await productListPage.verifySubCategoryTitles(testData.demoWebShopData.subCategoryTitles);
   });
 
   test('Verify that the Customer can sort out products by price', async () => {
@@ -100,6 +100,6 @@ test.describe('Demo Web Shop UI Tests', () => {
     await demoWebShopHomePage.booksGroup.click();
     await productListPage.addProductToCart();
     await demoWebShopHomePage.cartButton.click();
-    
+
   });
 });

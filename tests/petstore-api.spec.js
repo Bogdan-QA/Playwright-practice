@@ -9,7 +9,7 @@ test.describe.serial('Pet Store API Tests for users', () => {
   test('Verify that allows creating a User', async ({ request }) => {
 
     // Read user data from the JSON file
-    const { userCreationData } = testData;
+    const { userCreationData } = testData.petStore;
 
     // Make the POST request to create a user
     const response = await request.post(`${BASE_URL}/user`, {
@@ -22,9 +22,9 @@ test.describe.serial('Pet Store API Tests for users', () => {
 
     // Fetch the created user details using the username
     const getUserResponse = await request.get(`${BASE_URL}/user/${userCreationData.username}`);
-    expect(getUserResponse.ok()).toBeTruthy();
     expect(getUserResponse.status()).toBe(200);
-
+    expect(getUserResponse.ok()).toBeTruthy();
+    
     // Log the user details response
     const userDetails = await getUserResponse.json();
 
@@ -36,7 +36,7 @@ test.describe.serial('Pet Store API Tests for users', () => {
 
   test('Verify that allows login as a User', async ({ request }) => {
     // Read user data from the JSON file
-  const { userCreationData } = testData;
+  const { userCreationData } = testData.petStore;
 
   // Perform login request
   const loginResponse = await request.get(`${BASE_URL}/user/login`, {
@@ -82,7 +82,7 @@ test.describe.serial('Pet Store API Tests for users', () => {
 
   test('Verify that allows creating the list of Users', async ({ request }) => {
    // Use the userList data from the testData file
-   const userList = testData.userList;
+   const userList = testData.petStore.userList;
 
    const response = await request.post(`${BASE_URL}/user/createWithList`, {
      data: userList,
@@ -101,7 +101,7 @@ test.describe.serial('Pet Store API Tests for users', () => {
 test.describe.serial('Pet Store API Tests for pets', () => {
 
   test('Verify that allows adding a new Pet', async ({ request }) => {
-    const petData = testData.petData;
+    const petData = testData.petStore.petData;
 
     const response = await request.post(`${BASE_URL}/pet`, {
       data: petData
@@ -119,11 +119,11 @@ test.describe.serial('Pet Store API Tests for pets', () => {
   });
 
   test('Verify that allows updating Pet’s name and status', async ({ request }) => {
-    const petId = testData.petData.id;
+    const petId = testData.petStore.petData.id;
     const updateData = {
-      ...testData.petData,
-      name: testData.updatePetData.name,
-      status: testData.updatePetData.status
+      ...testData.petStore.petData,
+      name: testData.petStore.updatePetData.name,
+      status: testData.petStore.updatePetData.status
     };
 
     // Update the pet using PUT request
@@ -144,7 +144,7 @@ test.describe.serial('Pet Store API Tests for pets', () => {
 
   test('Verify that allows updating Pet’s image', async ({ request }) => {
   // Fetch the existing pet data
-  const petId = testData.petData.id;
+  const petId = testData.petStore.petData.id;
   const getResponse = await request.get(`${BASE_URL}/pet/${petId}`);
   expect(getResponse.ok()).toBeTruthy();
 
@@ -173,7 +173,7 @@ test.describe.serial('Pet Store API Tests for pets', () => {
   });
 
   test('Verify that allows deleting Pet', async ({ request }) => {
-    const petId = testData.petData.id;
+    const petId = testData.petStore.petData.id;
 
     // Delete the pet using DELETE request
     const deleteResponse = await request.delete(`${BASE_URL}/pet/${petId}`);
@@ -189,7 +189,7 @@ test.describe.serial('Pet Store API Tests for pets', () => {
   });
 
   test('Verify that the Pet is no longer available via GET', async ({ request }) => {
-    const petId = testData.petData.id;
+    const petId = testData.petStore.petData.id;
 
     // Try to retrieve the deleted pet using GET request
     const getResponse = await request.get(`${BASE_URL}/pet/${petId}`);

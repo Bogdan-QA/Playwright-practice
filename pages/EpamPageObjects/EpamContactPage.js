@@ -8,14 +8,28 @@ export class EpamContactPage {
     this.page = page;
     this.contactUsButton = page.locator('a.cta-button-ui[href="https://www.epam.com/about/who-we-are/contact"]');
     this.reportDownloadButton = page.locator('a[href*="EPAM_Corporate_Overview_Q4_EOY.pdf"]');
+    this.formSubmitButton = page.getByRole("button", { name: "Submit" });
+
+    this.firstNameField = page.locator('label:has-text("First name")').locator('..');
+    this.lastNameField = page.locator('label:has-text("Last name")').locator('..');
+    this.emailField = page.locator('label:has-text("Email")').locator('..').first();
+    this.phoneField = page.locator('label:has-text("Phone")').locator('..').first();
+    this.heardAboutEpamField = page.locator('label:has-text("How did you hear about EPAM?")').locator('..');
+    this.consentCheckbox = page.locator('[name="gdprConsent"]').locator('..').locator('..');
   }
 
   async open() {
     await this.page.goto('https://www.epam.com/about');
   }
 
-  async validateRequiredFields() {
-
+  getAllFieldLocators() {
+    return [
+      this.firstNameField,
+      this.lastNameField,
+      this.emailField,
+      this.phoneField,
+      this.heardAboutEpamField
+    ];
   }
 
   async downloadReportAndVerify(downloadsPath) {
