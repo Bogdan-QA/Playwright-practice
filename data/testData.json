@@ -9,6 +9,7 @@
     },
 
     "successfulRegistrationMessage": "Your registration completed",
+    "orderConfirmMessage" : "Your order has been successfully processed!",
 
     "loginData": {
       "email": "someEmail@example.com",

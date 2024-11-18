@@ -8,6 +8,8 @@ export class CartPage {
         this.removeFromCartCheckbox = page.locator('input[name="removefromcart"]');
         this.updateCartBtn = page.locator('input[name="updatecart"]');
         this.orderSummaryMessage = page.locator('.order-summary-content');
+        this.termscheckbox = page.locator('#termsofservice[type="checkbox"]');
+        this.checkoutButton = page.getByRole("button", { name: "Checkout" });
     }
 
     // Method to retrieve product details from the cart
@@ -25,9 +27,13 @@ export class CartPage {
     }
 
     async removeProductFromCart() {
-
         await this.removeFromCartCheckbox.waitFor({ state: 'visible' });
         await this.removeFromCartCheckbox.setChecked(true);
         await this.updateCartBtn.click();
+    }
+
+    async navigateToCheckout() {
+        await this.termscheckbox.setChecked(true);
+        await this.checkoutButton.click();
     }
 }

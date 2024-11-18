@@ -3,6 +3,7 @@ import { DemoWebShopHomePage } from '../pages/DemoWebShopObjects/DemoWebShopHome
 import { RegistrationPage } from '../pages/DemoWebShopObjects/RegistrationPage';
 import { ProductListPage } from '../pages/DemoWebShopObjects/ProductListPage';
 import { CartPage } from '../pages/DemoWebShopObjects/CartPage';
+import { CheckoutPage } from '../pages/DemoWebShopObjects/CheckoutPage';
 import testData from '../data/testData.json';
 
 test.describe('Demo Web Shop UI Tests', () => {
@@ -10,12 +11,14 @@ test.describe('Demo Web Shop UI Tests', () => {
   let registrationPage;
   let productListPage;
   let cartPage;
+  let checkoutPage;
 
   test.beforeEach(async ({ page }) => {
     demoWebShopHomePage = new DemoWebShopHomePage(page);
     registrationPage = new RegistrationPage(page);
     productListPage = new ProductListPage(page);
     cartPage = new CartPage(page);
+    checkoutPage = new CheckoutPage(page);
     await demoWebShopHomePage.open();
   });
 
@@ -96,10 +99,20 @@ test.describe('Demo Web Shop UI Tests', () => {
     expect(emptyCartMessage).toEqual('Your Shopping Cart is empty!');
   });
 
-  test.skip('Verify that the customer can checkout a product', async () => {
+  test('Verify that the customer can checkout a product', async () => {
+    await demoWebShopHomePage.loginUser.click();
+    await registrationPage.loginUser(testData.demoWebShopData.loginData);
     await demoWebShopHomePage.booksGroup.click();
     await productListPage.addProductToCart();
     await demoWebShopHomePage.cartButton.click();
-
+    await cartPage.navigateToCheckout();
+    await checkoutPage.confirmBillingAddress();
+    await checkoutPage.confirmShippingAddress();
+    await checkoutPage.confirmShippingMethod();
+    await checkoutPage.confirmPaymentMethod();
+    await checkoutPage.confirmPaymentInformation();
+    await checkoutPage.confirmOrder();
+    const orderConfirmaMessage = await checkoutPage.getOrderConfirmationMessage();
+    expect(orderConfirmaMessage).toBe(testData.demoWebShopData.orderConfirmMessage);
   });
 });
